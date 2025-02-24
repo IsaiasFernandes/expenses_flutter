@@ -1,8 +1,10 @@
 import 'package:expenses/presentation/home/card/cardAdpter.dart';
+import 'package:expenses/presentation/home/flatbutton/flatbutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/models/transaction.dart';
+import '../../utils/strings.dart';
 
 class MyHomePage extends StatelessWidget {
   final _transactions = [
@@ -44,7 +46,27 @@ class MyHomePage extends StatelessWidget {
                   return CardAdapter(transaction: tr);
                 }).toList(),
           ),
-
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: AppStrings.tituloLabel
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: AppStrings.valorLabel
+                      ),
+                    ),
+                    FlatButton()
+                  ],
+              ),
+            ),
+          )
         ],
       ),
     );

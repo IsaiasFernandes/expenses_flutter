@@ -2,14 +2,18 @@ import 'package:expenses/utils/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FlatButton extends StatelessWidget {
+class CustomFlatButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  CustomFlatButton({required this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: TextButton.styleFrom(
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,

@@ -1,8 +1,8 @@
 import 'package:expenses/domain/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import '../../../utils/CardUtils.dart';
+import '../../../../utils/CardUtils.dart';
+
 
 class CardAdapter extends Card {
   late final Transaction transaction;

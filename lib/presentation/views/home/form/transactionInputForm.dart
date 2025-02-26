@@ -17,6 +17,16 @@ class TransactionInputForm extends StatelessWidget {
         .replaceAll(',', '.')) ?? 0;
   }
 
+  _submitForm(context) {
+    final title = titleController.text;
+    final value = tryParseValue();
+    if (title.isEmpty || value <= 0) return;
+    Provider.of<TransactionViewModel>(context, listen: false)
+        .addTransaction(title, value);
+    titleController.text = '';
+    valueController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -29,6 +39,7 @@ class TransactionInputForm extends StatelessWidget {
               TextField(
                 controller: titleController,
                 decoration: InputDecoration(labelText: AppStrings.tituloLabel),
+                onSubmitted: (_) => _submitForm(context),
               ),
               TextField(
                 controller: valueController,
@@ -41,14 +52,12 @@ class TransactionInputForm extends StatelessWidget {
                   )
                 ],
                 decoration: InputDecoration(labelText: AppStrings.valorLabel),
+                onSubmitted: (_) => _submitForm(context),
               ),
               CustomFlatButton(
                 onPressed: () {
-                  final title = titleController.text;
-                  final value = tryParseValue();
-                  if (title.isEmpty || value <= 0) return;
-                  Provider.of<TransactionViewModel>(context, listen: false)
-                      .addTransaction(title, value);
+                FocusScope.of(context).unfocus();
+                  _submitForm(context);
                 },
               ),
             ],
@@ -56,6 +65,4 @@ class TransactionInputForm extends StatelessWidget {
         ),
     );
   }
-
-
 }

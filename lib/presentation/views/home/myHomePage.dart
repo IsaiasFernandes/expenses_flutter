@@ -17,28 +17,32 @@ class MyHomePage extends StatelessWidget {
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Gráfico'),
-                elevation: 5,
-              ),
-            ),
-            Expanded(
-                child: Consumer<TransactionViewModel>(
-                    builder: (context, viewModel, child) => Column(
-                      children: viewModel.transactions
-                          .map((tr) => CardAdapter(transaction: tr))
-                          .toList(),
-                    )
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Card(
+                  color: Colors.blue,
+                  child: Text('Gráfico'),
+                  elevation: 5,
                 ),
-            ),
-            TransactionInputForm(),
-          ],
+              ),
+              Consumer<TransactionViewModel>(
+                builder:
+                    (context, viewModel, child) => ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: viewModel.transactions.length,
+                      itemBuilder: (ctx, index) {
+                        return CardAdapter(transaction: viewModel.transactions[index]);
+                      }
+                    ),
+              ),
+              TransactionInputForm(),
+            ],
+          ),
         ),
       ),
     );

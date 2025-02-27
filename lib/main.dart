@@ -1,5 +1,7 @@
+import 'package:expenses/presentation/viewmodels/transactionViewmodel.dart';
 import 'package:expenses/presentation/views/home/myHomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -12,7 +14,10 @@ class ExpensesApp extends StatelessWidget {
           primary: Colors.blue, // Define a cor principal
         ),
       ),
-      home: MyHomePage(),
+
+      home: ChangeNotifierProvider(
+          create: (context) => TransactionViewModel(),
+          child: MyHomePage()),
     );
   }
 }

@@ -7,8 +7,8 @@ import '../../../utils/strings.dart';
 import 'card/cardAdpter.dart';
 
 class MyHomePage extends StatefulWidget {
-@override
-_MyHomePage createState() => _MyHomePage();
+  @override
+  _MyHomePage createState() => _MyHomePage();
 }
 
 class _MyHomePage extends State<MyHomePage> {
@@ -33,13 +33,11 @@ class _MyHomePage extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppStrings.tituloApp),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () => _openTransactionFormModal(context),
             icon: Icon(Icons.add),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -49,22 +47,22 @@ class _MyHomePage extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
                 child: Text('Gráfico'),
                 elevation: 5,
               ),
             ),
             Consumer<TransactionViewModel>(
-              builder: (context, viewModel, child) => ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: viewModel.transactions.length,
-                itemBuilder: (ctx, index) {
-                  return CardAdapter(
-                    transaction: viewModel.transactions[index],
-                  );
-                },
-              ),
+              builder:
+                  (context, viewModel, child) => ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: viewModel.transactions.length,
+                    itemBuilder: (ctx, index) {
+                      return CardAdapter(
+                        transaction: viewModel.transactions[index],
+                      );
+                    },
+                  ),
             ),
           ],
         ),

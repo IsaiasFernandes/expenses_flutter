@@ -1,4 +1,5 @@
 import 'package:expenses/domain/models/transaction.dart';
+import 'package:expenses/utils/strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/CardUtils.dart';
@@ -24,8 +25,8 @@ class CardAdapter extends Card {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.red, width: 2),
-              color: Colors.red.shade400,
+              border: Border.all(color: Theme.of(context).primaryColor, width: 2),
+              color: Theme.of(context).primaryColor,
             ),
             padding: EdgeInsets.all(10),
             child: Text(

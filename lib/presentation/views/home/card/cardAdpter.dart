@@ -26,7 +26,7 @@ class CardAdapter extends Card {
             margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).primaryColor, width: 2),
-              color: Theme.of(context).primaryColor,
+              color: Color(AppColors.colorPrimary),
             ),
             padding: EdgeInsets.all(10),
             child: Text(
@@ -44,7 +44,7 @@ class CardAdapter extends Card {
             children: [
               Text(
                 transaction.title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Row(
                 children: [

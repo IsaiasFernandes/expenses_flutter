@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/strings.dart';
+import 'buildEmptyList/buildEmptyList.dart';
 import 'card/cardAdpter.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -46,23 +47,23 @@ class _MyHomePage extends State<MyHomePage> {
           children: <Widget>[
             Container(
               width: double.infinity,
-              child: Card(
-                child: Text('Gráfico'),
-                elevation: 5,
-              ),
+              child: Card(child: Text('Gráfico'), elevation: 5),
             ),
             Consumer<TransactionViewModel>(
-              builder:
-                  (context, viewModel, child) => ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: viewModel.transactions.length,
-                    itemBuilder: (ctx, index) {
-                      return CardAdapter(
-                        transaction: viewModel.transactions[index],
-                      );
-                    },
-                  ),
+              builder: (context, viewModel, child) {
+                return viewModel.transactions.isEmpty
+                    ? buildEmptyList(context)
+                    : ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: viewModel.transactions.length,
+                      itemBuilder: (ctx, index) {
+                        return CardAdapter(
+                          transaction: viewModel.transactions[index],
+                        );
+                      },
+                    );
+              },
             ),
           ],
         ),

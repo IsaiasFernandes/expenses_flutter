@@ -15,7 +15,7 @@ class CustomFlatButton extends StatelessWidget {
         TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: Theme.of(context).primaryColor,
             foregroundColor: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),

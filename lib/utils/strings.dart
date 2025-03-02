@@ -4,4 +4,10 @@ class AppStrings {
   static const String tituloLabel = 'Título';
   static const String valorLabel = 'Valor (R\$)';
   static const String tituloBotao = 'Nova Transação';
+  static const String listaTransacoesVazia = 'Nenhuma Transação Cadastrada!';
+}
+
+class AppColors {
+  static const int colorPrimary = 0xfff25872;
+  static const int colorSecondary = 0xffe8b787;
 }

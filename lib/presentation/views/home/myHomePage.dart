@@ -1,4 +1,5 @@
 import 'package:expenses/presentation/viewmodels/transactionViewmodel.dart';
+import 'package:expenses/presentation/views/home/chart/chart.dart';
 import 'package:expenses/presentation/views/home/form/transactionInputForm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,9 +46,10 @@ class _MyHomePage extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(child: Text('Gráfico'), elevation: 5),
+            Consumer<TransactionViewModel>(
+              builder: (context, viewModel, child) {
+                return Chart(viewModel.recentTransations);
+              },
             ),
             Consumer<TransactionViewModel>(
               builder: (context, viewModel, child) {

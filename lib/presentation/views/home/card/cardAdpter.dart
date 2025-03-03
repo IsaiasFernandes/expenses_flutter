@@ -26,6 +26,7 @@ class CardAdapter extends Card {
             margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).primaryColor, width: 2),
+              borderRadius: BorderRadius.circular(20),
               color: Color(AppColors.colorPrimary),
             ),
             padding: EdgeInsets.all(10),

@@ -26,7 +26,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': viewModel.calculateSumTransactionsOnDate(weekDay),
       };
-    });
+    }).reversed.toList();
   }
 
   double weekTotalValue(BuildContext context) {
@@ -41,11 +41,8 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      child: Container(
-        height: 150,
-        padding: EdgeInsets.all(10),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: transactionsCard.map((tr) {
@@ -59,7 +56,6 @@ class Chart extends StatelessWidget {
             }).toList(),
           ),
         ),
-      ),
-    );
+      );
   }
 }

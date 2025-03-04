@@ -45,4 +45,9 @@ class TransactionViewModel extends ChangeNotifier {
         ? 0.00
         : transacoesFiltradas.map((transacao) => transacao.value).reduce((valueA, valueB) => valueA + valueB);
   }
+
+  void removeTransaction(String id) {
+    _transactions.removeWhere((tr) => tr.id == id);
+    notifyListeners();
+  }
 }

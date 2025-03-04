@@ -30,6 +30,11 @@ class _MyHomePage extends State<MyHomePage> {
     );
   }
 
+  _removeTransaction(String transactionId) {
+    final viewModel = Provider.of<TransactionViewModel>(context, listen: false);
+    viewModel.removeTransaction(transactionId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +66,8 @@ class _MyHomePage extends State<MyHomePage> {
                       itemCount: viewModel.transactions.length,
                       itemBuilder: (ctx, index) {
                         return CardAdapter(
-                          transaction: viewModel.transactions[index],
+                            transaction: viewModel.transactions[index],
+                            onRemove : _removeTransaction
                         );
                       },
                     );

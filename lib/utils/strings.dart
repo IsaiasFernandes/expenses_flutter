@@ -3,7 +3,9 @@ class AppStrings {
   static const String tituloApp = 'Despesas Pessoais';
   static const String tituloLabel = 'Título';
   static const String valorLabel = 'Valor (R\$)';
-  static const String tituloBotao = 'Nova Transação';
+  static const String novatransacao = 'Nova Transação';
+  static const String selecionarData = 'Selecionar Data';
+  static const String nenhumaDataSeliecionada = 'Nehuma data selecionada!';
   static const String listaTransacoesVazia = 'Nenhuma Transação Cadastrada!';
 }
 

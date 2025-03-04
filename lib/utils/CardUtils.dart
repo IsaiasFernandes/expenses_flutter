@@ -3,7 +3,10 @@
 import 'package:intl/intl.dart';
 
 String formatDate(DateTime date) {
-  return DateFormat('d MMM y HH:mm').format(date);
+  return date.hour == 00 && date.minute == 00 ?
+  DateFormat('d MMM y').format(date) :
+  DateFormat('d MMM y HH:mm').format(date);
+
 }
 
 String formatValue(double value) {

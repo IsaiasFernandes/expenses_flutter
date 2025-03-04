@@ -1,5 +1,4 @@
 import 'package:expenses/domain/models/transaction.dart';
-import 'package:expenses/utils/strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/CardUtils.dart';

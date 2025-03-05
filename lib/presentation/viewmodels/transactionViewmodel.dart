@@ -11,6 +11,11 @@ class TransactionViewModel extends ChangeNotifier {
     Transaction(id: 'T2', title: 'Conta de Luz', value: 211.30, date: DateTime.now().subtract(Duration(days: 3))),
     Transaction(id: 'T3', title: 'Conta de agua', value: 110.50, date: DateTime.now().subtract(Duration(days: 5))),
     Transaction(id: 'T4', title: 'Conta de internet', value: 300.00, date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(id: 'T5', title: 'Conta de internet', value: 300.00, date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(id: 'T6', title: 'Conta de internet', value: 300.00, date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(id: 'T7', title: 'Conta de internet', value: 300.00, date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(id: 'T8', title: 'Conta de internet', value: 300.00, date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(id: 'T9', title: 'Conta de utimo', value: 300.00, date: DateTime.now().subtract(Duration(days: 4))),
   ];
   List<Transaction> get transactions => _transactions;
 

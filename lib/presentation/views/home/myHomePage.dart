@@ -9,11 +9,19 @@ import 'buildEmptyList/buildEmptyList.dart';
 import 'card/cardAdpter.dart';
 
 class MyHomePage extends StatefulWidget {
+  final double availableHeight;
+
+  MyHomePage(this.availableHeight);
+
   @override
-  _MyHomePage createState() => _MyHomePage();
+  _MyHomePage createState() => _MyHomePage(availableHeight);
 }
 
 class _MyHomePage extends State<MyHomePage> {
+  final double availableHeight;
+
+  _MyHomePage(this.availableHeight);
+
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -51,27 +59,32 @@ class _MyHomePage extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Consumer<TransactionViewModel>(
-              builder: (context, viewModel, child) {
-                return Chart(viewModel.recentTransations);
-              },
+            Container(
+              height: availableHeight * 0.25,
+              child: Consumer<TransactionViewModel>(
+                builder: (context, viewModel, child) {
+                  return Chart(viewModel.recentTransations);
+                },
+              ),
             ),
-            Consumer<TransactionViewModel>(
-              builder: (context, viewModel, child) {
-                return viewModel.transactions.isEmpty
-                    ? buildEmptyList(context)
-                    : ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: viewModel.transactions.length,
-                      itemBuilder: (ctx, index) {
-                        return CardAdapter(
-                            transaction: viewModel.transactions[index],
-                            onRemove : _removeTransaction
-                        );
-                      },
-                    );
-              },
+            Container(
+              height: availableHeight * 0.75,
+              child: Consumer<TransactionViewModel>(
+                builder: (context, viewModel, child) {
+                  return viewModel.transactions.isEmpty
+                      ? buildEmptyList(context)
+                      : ListView.builder(
+                        padding: EdgeInsets.only(bottom: 10),
+                        itemCount: viewModel.transactions.length,
+                        itemBuilder: (ctx, index) {
+                          return CardAdapter(
+                              transaction: viewModel.transactions[index],
+                              onRemove : _removeTransaction
+                          );
+                        },
+                      );
+                },
+              ),
             ),
           ],
         ),

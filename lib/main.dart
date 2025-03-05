@@ -9,17 +9,20 @@ main() => runApp(ExpensesApp());
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBarTheme(
+      titleTextStyle: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 20),
+      backgroundColor: Color(AppColors.colorPrimary),
+      foregroundColor: Colors.white
+    );
+    final availableHeight = MediaQuery.of(context).size.height - kToolbarHeight - MediaQuery.of(context).padding.top;
+
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
           titleMedium: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        appBarTheme: AppBarTheme(
-          titleTextStyle: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 20),
-          backgroundColor: Color(AppColors.colorPrimary),
-          foregroundColor: Colors.white,
-        ),
+        appBarTheme: appBar,
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color(AppColors.colorSecondary),
           primary: Color(AppColors.colorPrimary),
@@ -28,7 +31,7 @@ class ExpensesApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
           create: (context) => TransactionViewModel(),
-          child: MyHomePage()),
+          child: MyHomePage(availableHeight)),
     );
   }
 }

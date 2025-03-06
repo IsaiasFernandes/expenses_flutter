@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expenses/presentation/viewmodels/transactionViewmodel.dart';
 import 'package:expenses/presentation/views/home/chart/chart.dart';
 import 'package:expenses/presentation/views/home/form/transactionInputForm.dart';
@@ -103,7 +105,7 @@ class _MyHomePage extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:  Platform.isIOS ? Container() : FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
       ),

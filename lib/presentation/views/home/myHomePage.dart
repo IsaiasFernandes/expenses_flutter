@@ -82,7 +82,7 @@ class _MyHomePage extends State<MyHomePage> {
               ),
             if (!_showChart || !isLandscape)
               Container(
-                height: availableHeight * 0.75,
+                height: availableHeight * (isLandscape ? 1 : 0.75) ,
                 child: Consumer<TransactionViewModel>(
                   builder: (context, viewModel, child) {
                     return viewModel.transactions.isEmpty

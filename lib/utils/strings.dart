@@ -2,6 +2,7 @@
 class AppStrings {
   static const String tituloApp = 'Despesas Pessoais';
   static const String tituloLabel = 'Título';
+  static const String exbirGrafico = 'Exibir Gráfico';
   static const String valorLabel = 'Valor (R\$)';
   static const String novatransacao = 'Nova Transação';
   static const String selecionarData = 'Selecionar Data';

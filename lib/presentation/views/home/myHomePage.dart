@@ -9,18 +9,14 @@ import 'buildEmptyList/buildEmptyList.dart';
 import 'card/cardAdpter.dart';
 
 class MyHomePage extends StatefulWidget {
-  final double availableHeight;
-
-  MyHomePage(this.availableHeight);
+  MyHomePage();
 
   @override
-  _MyHomePage createState() => _MyHomePage(availableHeight);
+  _MyHomePage createState() => _MyHomePage();
 }
 
 class _MyHomePage extends State<MyHomePage> {
-  final double availableHeight;
-
-  _MyHomePage(this.availableHeight);
+  bool _showChart = false;
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
@@ -45,10 +41,26 @@ class _MyHomePage extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final availableHeight =
+        MediaQuery.of(context).size.height -
+        kToolbarHeight -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppStrings.tituloApp),
         actions: [
+          if (isLandscape)
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  _showChart = !_showChart;
+                });
+              },
+              icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+            ),
           IconButton(
             onPressed: () => _openTransactionFormModal(context),
             icon: Icon(Icons.add),
@@ -59,33 +71,35 @@ class _MyHomePage extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
-              height: availableHeight * 0.25,
-              child: Consumer<TransactionViewModel>(
-                builder: (context, viewModel, child) {
-                  return Chart(viewModel.recentTransations);
-                },
+            if (_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 0.75 : 0.25),
+                child: Consumer<TransactionViewModel>(
+                  builder: (context, viewModel, child) {
+                    return Chart(viewModel.recentTransations);
+                  },
+                ),
               ),
-            ),
-            Container(
-              height: availableHeight * 0.75,
-              child: Consumer<TransactionViewModel>(
-                builder: (context, viewModel, child) {
-                  return viewModel.transactions.isEmpty
-                      ? buildEmptyList(context)
-                      : ListView.builder(
-                        padding: EdgeInsets.only(bottom: 10),
-                        itemCount: viewModel.transactions.length,
-                        itemBuilder: (ctx, index) {
-                          return CardAdapter(
+            if (!_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 1 : 0.75) ,
+                child: Consumer<TransactionViewModel>(
+                  builder: (context, viewModel, child) {
+                    return viewModel.transactions.isEmpty
+                        ? buildEmptyList(context)
+                        : ListView.builder(
+                          padding: EdgeInsets.only(bottom: 10),
+                          itemCount: viewModel.transactions.length,
+                          itemBuilder: (ctx, index) {
+                            return CardAdapter(
                               transaction: viewModel.transactions[index],
-                              onRemove : _removeTransaction
-                          );
-                        },
-                      );
-                },
+                              onRemove: _removeTransaction,
+                            );
+                          },
+                        );
+                  },
+                ),
               ),
-            ),
           ],
         ),
       ),

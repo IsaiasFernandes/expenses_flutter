@@ -9,12 +9,12 @@ main() => runApp(ExpensesApp());
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     final appBar = AppBarTheme(
       titleTextStyle: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 20),
       backgroundColor: Color(AppColors.colorPrimary),
       foregroundColor: Colors.white
     );
-    final availableHeight = MediaQuery.of(context).size.height - kToolbarHeight - MediaQuery.of(context).padding.top;
 
     return MaterialApp(
       theme: ThemeData(
@@ -31,7 +31,8 @@ class ExpensesApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
           create: (context) => TransactionViewModel(),
-          child: MyHomePage(availableHeight)),
+          child: MyHomePage(),
+      )
     );
   }
 }

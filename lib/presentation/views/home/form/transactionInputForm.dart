@@ -65,60 +65,67 @@ class _TransactionInputForm extends State<TransactionInputForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              decoration: InputDecoration(labelText: AppStrings.tituloLabel),
-              onSubmitted: (_) => _submitForm(context),
-            ),
-            TextField(
-              controller: _valueController,
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                CurrencyInputFormatter(
-                  leadingSymbol: 'R\$',
-                  useSymbolPadding: true,
-                  thousandSeparator: ThousandSeparator.Period,
-                ),
-              ],
-              decoration: InputDecoration(labelText: AppStrings.valorLabel),
-              onSubmitted: (_) => _submitForm(context),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? AppStrings.nenhumaDataSeliecionada
-                          : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                    ),
-                  ),
-                  CustomFlatButton(
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Theme.of(context).primaryColor,
-                    tituloBotao: AppStrings.selecionarData,
-                    onPressed: _showdatePicker,
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                decoration: InputDecoration(labelText: AppStrings.tituloLabel),
+                onSubmitted: (_) => _submitForm(context),
+              ),
+              TextField(
+                controller: _valueController,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  CurrencyInputFormatter(
+                    leadingSymbol: 'R\$',
+                    useSymbolPadding: true,
+                    thousandSeparator: ThousandSeparator.Period,
                   ),
                 ],
+                decoration: InputDecoration(labelText: AppStrings.valorLabel),
+                onSubmitted: (_) => _submitForm(context),
               ),
-            ),
-            CustomFlatButton(
-              tituloBotao: AppStrings.novatransacao,
-              backgroundColor: null,
-              foregroundColor: null,
-              onPressed: () {
-                FocusScope.of(context).unfocus(); // Fecha o teclado
-                _submitForm(context); // Submete o formulário
-              },
-            ),
-          ],
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? AppStrings.nenhumaDataSeliecionada
+                            : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                      ),
+                    ),
+                    CustomFlatButton(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Theme.of(context).primaryColor,
+                      tituloBotao: AppStrings.selecionarData,
+                      onPressed: _showdatePicker,
+                    ),
+                  ],
+                ),
+              ),
+              CustomFlatButton(
+                tituloBotao: AppStrings.novatransacao,
+                backgroundColor: null,
+                foregroundColor: null,
+                onPressed: () {
+                  FocusScope.of(context).unfocus(); // Fecha o teclado
+                  _submitForm(context); // Submete o formulário
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

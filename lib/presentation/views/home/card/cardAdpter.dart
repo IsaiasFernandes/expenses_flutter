@@ -18,8 +18,6 @@ class CardAdapter extends Card {
     formattedTittle = generateAcronym(transaction.title);
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -44,10 +42,10 @@ class CardAdapter extends Card {
           ),
         ),
         title: Text(
-            transaction.title,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          transaction.title,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         subtitle: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -60,11 +58,18 @@ class CardAdapter extends Card {
             ),
           ],
         ),
-        trailing: IconButton(
-          icon: Icon(Icons.delete),
-          color: Theme.of(context).colorScheme.error,
-          onPressed: () => onRemove(transaction.id.toString()),
-        ),
+        trailing:
+            MediaQuery.of(context).size.width > 600
+                ? TextButton.icon(
+                  onPressed: () => onRemove(transaction.id.toString()),
+                  icon: const Icon(Icons.delete),
+                  label: const Text('Excluir'),
+                )
+                : IconButton(
+                  icon: Icon(Icons.delete),
+                  color: Theme.of(context).colorScheme.error,
+                  onPressed: () => onRemove(transaction.id.toString()),
+                ),
       ),
     );
   }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomFlatButton extends StatelessWidget {
@@ -15,22 +18,30 @@ class CustomFlatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
+    return Platform.isIOS
+        ? CupertinoButton(
+          child: Text(tituloBotao),
           onPressed: onPressed,
-          style: TextButton.styleFrom(
-            backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
-            foregroundColor: foregroundColor ?? Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          ),
-          child: Text(
-            style: TextStyle(fontWeight: FontWeight.bold),
-            tituloBotao,
-          ),
-        ),
-      ],
-    );
+          color: backgroundColor ?? Theme.of(context).primaryColor,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+        )
+        : Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: onPressed,
+              style: TextButton.styleFrom(
+                backgroundColor:
+                    backgroundColor ?? Theme.of(context).primaryColor,
+                foregroundColor: foregroundColor ?? Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
+              child: Text(
+                style: TextStyle(fontWeight: FontWeight.bold),
+                tituloBotao,
+              ),
+            ),
+          ],
+        );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:expenses/presentation/views/home/customDatePicker/customDatePicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:intl/intl.dart';
@@ -47,22 +48,6 @@ class _TransactionInputForm extends State<TransactionInputForm> {
     Navigator.of(context).pop();
   }
 
-  _showdatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2025),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -95,25 +80,9 @@ class _TransactionInputForm extends State<TransactionInputForm> {
                 decoration: InputDecoration(labelText: AppStrings.valorLabel),
                 onSubmitted: (_) => _submitForm(context),
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        _selectedDate == null
-                            ? AppStrings.nenhumaDataSeliecionada
-                            : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                      ),
-                    ),
-                    CustomFlatButton(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Theme.of(context).primaryColor,
-                      tituloBotao: AppStrings.selecionarData,
-                      onPressed: _showdatePicker,
-                    ),
-                  ],
-                ),
+              CustomDatePicker(
+                  selectedDate: _selectedDate,
+                  onDateChanged: (newDate) => setState(() => _selectedDate = newDate)
               ),
               CustomFlatButton(
                 tituloBotao: AppStrings.novatransacao,
